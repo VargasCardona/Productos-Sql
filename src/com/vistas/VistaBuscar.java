@@ -57,6 +57,13 @@ public class VistaBuscar extends javax.swing.JFrame {
 			} else {
 				lblResultados.setText(" ");
 			}
+			if(modelo.getRowCount() == 1){
+				lblSku.setText(rs.getObject(1).toString());
+				lblNombre.setText(rs.getObject(2).toString());
+				lblPrecio.setText(rs.getObject(3).toString());
+				lblDistribuidor.setText(rs.getObject(4).toString());
+				lblCategoria.setText(rs.getObject(5).toString());
+			}
 		} catch (SQLException e) {
 			System.err.println(e.toString());
 		}
@@ -73,6 +80,16 @@ public class VistaBuscar extends javax.swing.JFrame {
         lblResultados = new javax.swing.JLabel();
         txtSku = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblCategoria = new javax.swing.JLabel();
+        lblDistribuidor = new javax.swing.JLabel();
+        lblPrecio = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        lblSku = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,11 +131,43 @@ public class VistaBuscar extends javax.swing.JFrame {
         jLabel3.setText("SKU:");
         bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 30, 20));
 
+        jLabel2.setText("SKU:");
+        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
+
+        jLabel4.setText("Nombre:");
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
+
+        jLabel5.setText("Distribuidor:");
+        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, -1, -1));
+
+        jLabel6.setText("Precio:");
+        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
+
+        jLabel7.setText("Categoría:");
+        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, -1, -1));
+
+        lblCategoria.setText("-");
+        bg.add(lblCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 190, -1));
+
+        lblDistribuidor.setText("-");
+        bg.add(lblDistribuidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 190, -1));
+
+        lblPrecio.setText("-");
+        bg.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 190, -1));
+
+        lblNombre.setText("-");
+        bg.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 190, -1));
+
+        lblSku.setText("-");
+        bg.add(lblSku, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 190, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,9 +188,19 @@ public class VistaBuscar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCategoria;
+    private javax.swing.JLabel lblDistribuidor;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblResultados;
+    private javax.swing.JLabel lblSku;
     private javax.swing.JTable tablaProductos;
     private javax.swing.JTextField txtSku;
     // End of variables declaration//GEN-END:variables
