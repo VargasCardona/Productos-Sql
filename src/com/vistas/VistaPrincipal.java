@@ -1,18 +1,14 @@
 package com.vistas;
 
-import com.utils.ConexionUtils;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import javax.swing.table.DefaultTableModel;
-
 public class VistaPrincipal extends javax.swing.JFrame {
 
 	public VistaPrincipal() {
             setLocationRelativeTo(this);
             setTitle("Productos");
             initComponents();
-            actualizarTabla(null);
+			
+			btnActualizar.setEnabled(false);
+			btnEliminar.setEnabled(false);
 	}
         
 //        private void logicaBotonBuscar(){
@@ -39,82 +35,69 @@ public class VistaPrincipal extends javax.swing.JFrame {
 //            String sql = "INSERT INTO `estudiantes` (`nombre`, `edad`, `cedula`, `codigo`, `id`) VALUES ('Dejan Stankovic', '23', '76132', '12', NULL);";
 //        }
         
-        private void actualizarTabla(String where) {
-            try {
-                DefaultTableModel modelo = new DefaultTableModel();
-                tablaProductos.setModel(modelo);
-
-                ResultSet rs = ConexionUtils.realizarConsulta("SELECT * FROM productos");
-
-                ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-                int cantidadColumnas = rsMd.getColumnCount();
-
-                modelo.addColumn("SKU:");
-                modelo.addColumn("Nombre:");
-                modelo.addColumn("Precio:");
-                modelo.addColumn("Distribuidor:");
-                modelo.addColumn("Categorias:");
-
-                int[] anchos = {50, 50, 50, 50, 50};
-                for (int i = 0; i < tablaProductos.getColumnCount(); i++) {
-                    tablaProductos.getColumnModel().getColumn(i).setPreferredWidth(anchos[1]);
-                }
-                while (rs.next()) {
-                    Object[] filas = new Object[cantidadColumnas];
-                    for (int i = 0; i < cantidadColumnas; i++) {
-                        filas[i] = rs.getObject(i + 1);
-                    }
-                    modelo.addRow(filas);
-                }
-            } catch (SQLException e) {
-                System.err.println(e.toString());
-            }
-        }
 
 	@SuppressWarnings("unchecked")
-        // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-        private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-                jScrollPane1 = new javax.swing.JScrollPane();
-                tablaProductos = new javax.swing.JTable();
+        bg = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JButton();
+        btnListar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
 
-                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-                tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
-                        new Object [][] {
-                                {null, null, null, null},
-                                {null, null, null, null},
-                                {null, null, null, null},
-                                {null, null, null, null}
-                        },
-                        new String [] {
-                                "Title 1", "Title 2", "Title 3", "Title 4"
-                        }
-                ));
-                jScrollPane1.setViewportView(tablaProductos);
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-                getContentPane().setLayout(layout);
-                layout.setHorizontalGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                                .addContainerGap())
-                );
-                layout.setVerticalGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                                .addContainerGap())
-                );
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Consultar Base de Datos");
+        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 40));
 
-                pack();
-        }// </editor-fold>//GEN-END:initComponents
+        btnEliminar.setText("Eliminar Producto");
+        bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 380, 30));
 
-        // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JTable tablaProductos;
-        // End of variables declaration//GEN-END:variables
+        btnListar.setText("Listar Productos");
+        btnListar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnListarMouseClicked(evt);
+            }
+        });
+        bg.add(btnListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 380, 30));
+
+        btnBuscar.setText("Buscar por SKU");
+        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 380, 30));
+
+        btnActualizar.setText("Actualizar Productos");
+        bg.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 380, 30));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnListarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListarMouseClicked
+        VistaListar vista = new VistaListar();
+		vista.setVisible(true);
+    }//GEN-LAST:event_btnListarMouseClicked
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bg;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnListar;
+    private javax.swing.JLabel jLabel1;
+    // End of variables declaration//GEN-END:variables
 }
