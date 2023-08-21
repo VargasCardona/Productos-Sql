@@ -68,6 +68,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         bg.add(btnListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 380, 30));
 
         btnBuscar.setText("Buscar por SKU");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 380, 30));
 
         btnActualizar.setText("Actualizar Productos");
@@ -91,6 +96,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         VistaListar vista = new VistaListar();
 		vista.setVisible(true);
     }//GEN-LAST:event_btnListarMouseClicked
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        VistaBuscar vista = new VistaBuscar();
+        vista.setVisible(true);
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
