@@ -22,20 +22,6 @@ public class VistaBuscar extends javax.swing.JFrame {
 		tablaProductos.setCellSelectionEnabled(false); // Evitar selecciones en la tabla
 	}
 
-//        private void logicaBotonCrear(){
-//            String sku = txt.getText();
-//            String nombre = txt.getText();
-//            String precio = txt.getText();
-//            String distribuidor = txt.getText();
-//            String categorias = txt.getText();
-//            
-//            if (!precio.esNumero()) {
-//                JOptionPane.showMessageDialog(null, "El precio debe ser escrito en dígitos");
-//                return;
-//            }
-//            
-//            String sql = "INSERT INTO `estudiantes` (`nombre`, `edad`, `cedula`, `codigo`, `id`) VALUES ('Dejan Stankovic', '23', '76132', '12', NULL);";
-//        }
 	private void actualizarTabla(String where) {
 		try {
 			DefaultTableModel modelo = new DefaultTableModel();
@@ -118,11 +104,6 @@ public class VistaBuscar extends javax.swing.JFrame {
         lblResultados.setText("{Resultados}");
         bg.add(lblResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 370, 30));
 
-        txtSku.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSkuActionPerformed(evt);
-            }
-        });
         txtSku.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSkuKeyReleased(evt);
@@ -147,13 +128,11 @@ public class VistaBuscar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSkuActionPerformed
-		// TODO add your handling code here:
-    }//GEN-LAST:event_txtSkuActionPerformed
-
     private void txtSkuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSkuKeyReleased
-		if (!txtSku.equals("")) {
+		if (!txtSku.getText().equals("")) {
 			actualizarTabla("WHERE sku = '" + txtSku.getText() + "'");
+		} else {
+			actualizarTabla("");
 		}
     }//GEN-LAST:event_txtSkuKeyReleased
 
