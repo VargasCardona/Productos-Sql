@@ -44,8 +44,8 @@ public class VistaBuscar extends javax.swing.JFrame {
 				tablaProductos.getColumnModel().getColumn(i).setPreferredWidth(anchos[1]);
 			}
 			
+                        Object[] filas = new Object[cantidadColumnas];
 			while (rs.next()) {
-				Object[] filas = new Object[cantidadColumnas];
 				for (int i = 0; i < cantidadColumnas; i++) {
 					filas[i] = rs.getObject(i + 1);
 				}
@@ -58,11 +58,11 @@ public class VistaBuscar extends javax.swing.JFrame {
 				lblResultados.setText(" ");
 			}
 			if(modelo.getRowCount() == 1){
-				lblSku.setText(tablaProductos.getValueAt(0, 0).toString());
-				lblNombre.setText(tablaProductos.getValueAt(0, 1).toString());
-				lblPrecio.setText(tablaProductos.getValueAt(0, 2).toString());
-				lblDistribuidor.setText(tablaProductos.getValueAt(0, 3).toString());
-				lblCategoria.setText(tablaProductos.getValueAt(0, 4).toString());
+				lblSku.setText(filas[0].toString());
+				lblNombre.setText(filas[1].toString());
+				lblPrecio.setText(filas[2].toString());
+				lblDistribuidor.setText(filas[3].toString());
+				lblCategoria.setText(filas[4].toString());
 			} else {
                                 lblSku.setText("-");
 				lblNombre.setText("-");
