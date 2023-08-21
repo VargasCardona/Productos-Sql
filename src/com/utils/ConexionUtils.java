@@ -6,10 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.mariadb.jdbc.Connection;
 
-/**
- *
- * @author Nicolas Vargas Cardona
- */
 public class ConexionUtils {
 
 	public static ResultSet realizarConsulta(String sqlQuery) {

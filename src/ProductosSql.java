@@ -1,4 +1,3 @@
-
 import com.vistas.VistaPrincipal;
 
 public class ProductosSql {

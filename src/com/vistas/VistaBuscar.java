@@ -43,36 +43,37 @@ public class VistaBuscar extends javax.swing.JFrame {
 			for (int i = 0; i < tablaProductos.getColumnCount(); i++) {
 				tablaProductos.getColumnModel().getColumn(i).setPreferredWidth(anchos[1]);
 			}
-			
-                        Object[] filas = new Object[cantidadColumnas];
+
+			Object[] filas = new Object[cantidadColumnas];
 			while (rs.next()) {
 				for (int i = 0; i < cantidadColumnas; i++) {
 					filas[i] = rs.getObject(i + 1);
 				}
 				modelo.addRow(filas);
 			}
-			
-			if(modelo.getRowCount() == 0){
+
+			if (modelo.getRowCount() == 0) {
 				lblResultados.setText("No se han encontrado coincidencias");
 			} else {
 				lblResultados.setText(" ");
 			}
-			if(modelo.getRowCount() == 1){
+			
+			if (modelo.getRowCount() == 1) {
 				lblSku.setText(filas[0].toString());
 				lblNombre.setText(filas[1].toString());
 				lblPrecio.setText(filas[2].toString());
 				lblDistribuidor.setText(filas[3].toString());
 				lblCategoria.setText(filas[4].toString());
 			} else {
-                                lblSku.setText("-");
+				lblSku.setText("-");
 				lblNombre.setText("-");
 				lblPrecio.setText("-");
 				lblDistribuidor.setText("-");
 				lblCategoria.setText("-");
-                        }
+			}
+			
 		} catch (SQLException e) {
-//			System.err.println(e.toString());
-                        e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 

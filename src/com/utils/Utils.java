@@ -1,9 +1,5 @@
 package com.utils;
 
-/**
- *
- * @author Mateo
- */
 public class Utils {
 
 	public boolean esDouble(String entrada) {
