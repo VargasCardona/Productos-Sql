@@ -3,7 +3,7 @@ package com.vistas;
 public class VistaPrincipal extends javax.swing.JFrame {
 
 	public VistaPrincipal() {
-            setLocationRelativeTo(this);
+            this.setLocationRelativeTo(null);
             setTitle("Productos");
             initComponents();
 			

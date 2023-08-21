@@ -10,13 +10,13 @@ import javax.swing.table.DefaultTableModel;
 public class VistaListar extends javax.swing.JFrame {
 
 	public VistaListar() {
-            setLocationRelativeTo(this);
+            this.setLocationRelativeTo(null);
             setTitle("Listar Productos");
 			
             initComponents();
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cerrar unicamente la ventana actual
 			
-			actualizarTabla(null);
+			actualizarTabla();
 			tablaProductos.setDefaultEditor(Object.class, null); // Evitar ediciones en la tabla
 			tablaProductos.getTableHeader().setEnabled(false); // Evitar reorganizaciones de Headers en la tabla
 			tablaProductos.setCellSelectionEnabled(false); // Evitar selecciones en la tabla
@@ -37,7 +37,7 @@ public class VistaListar extends javax.swing.JFrame {
 //            String sql = "INSERT INTO `estudiantes` (`nombre`, `edad`, `cedula`, `codigo`, `id`) VALUES ('Dejan Stankovic', '23', '76132', '12', NULL);";
 //        }
         
-        private void actualizarTabla(String where) {
+        private void actualizarTabla() {
             try {
                 DefaultTableModel modelo = new DefaultTableModel();
                 tablaProductos.setModel(modelo);

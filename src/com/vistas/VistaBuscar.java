@@ -9,19 +9,19 @@ import javax.swing.table.DefaultTableModel;
 
 public class VistaBuscar extends javax.swing.JFrame {
 
-    public VistaBuscar() {
-        setLocationRelativeTo(this);
-        setTitle("Buscar Productos");
+	public VistaBuscar() {
+		this.setLocationRelativeTo(null);
+		setTitle("Buscar Productos");
 
-        initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cerrar unicamente la ventana actual
+		initComponents();
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cerrar unicamente la ventana actual
 
-        actualizarTabla("");
-        tablaProductos.setDefaultEditor(Object.class, null); // Evitar ediciones en la tabla
-        tablaProductos.getTableHeader().setEnabled(false); // Evitar reorganizaciones de Headers en la tabla
-        tablaProductos.setCellSelectionEnabled(false); // Evitar selecciones en la tabla
-    }
-               
+		actualizarTabla("");
+		tablaProductos.setDefaultEditor(Object.class, null); // Evitar ediciones en la tabla
+		tablaProductos.getTableHeader().setEnabled(false); // Evitar reorganizaciones de Headers en la tabla
+		tablaProductos.setCellSelectionEnabled(false); // Evitar selecciones en la tabla
+	}
+
 //        private void logicaBotonCrear(){
 //            String sku = txt.getText();
 //            String nombre = txt.getText();
@@ -36,39 +36,45 @@ public class VistaBuscar extends javax.swing.JFrame {
 //            
 //            String sql = "INSERT INTO `estudiantes` (`nombre`, `edad`, `cedula`, `codigo`, `id`) VALUES ('Dejan Stankovic', '23', '76132', '12', NULL);";
 //        }
-        
-        private void actualizarTabla(String where) {
-            try {
-                DefaultTableModel modelo = new DefaultTableModel();
-                tablaProductos.setModel(modelo);
+	private void actualizarTabla(String where) {
+		try {
+			DefaultTableModel modelo = new DefaultTableModel();
+			tablaProductos.setModel(modelo);
 
-                String consulta = "SELECT * FROM productos "+where;
-                ResultSet rs = ConexionUtils.realizarConsulta(consulta);
+			String consulta = "SELECT * FROM productos " + where;
+			ResultSet rs = ConexionUtils.realizarConsulta(consulta);
 
-                ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-                int cantidadColumnas = rsMd.getColumnCount();
+			ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+			int cantidadColumnas = rsMd.getColumnCount();
 
-                modelo.addColumn("SKU:");
-                modelo.addColumn("Nombre:");
-                modelo.addColumn("Precio:");
-                modelo.addColumn("Distribuidor:");
-                modelo.addColumn("Categorias:");
+			modelo.addColumn("SKU:");
+			modelo.addColumn("Nombre:");
+			modelo.addColumn("Precio:");
+			modelo.addColumn("Distribuidor:");
+			modelo.addColumn("Categorias:");
 
-                int[] anchos = {50, 50, 50, 50, 50};
-                for (int i = 0; i < tablaProductos.getColumnCount(); i++) {
-                    tablaProductos.getColumnModel().getColumn(i).setPreferredWidth(anchos[1]);
-                }
-                while (rs.next()) {
-                    Object[] filas = new Object[cantidadColumnas];
-                    for (int i = 0; i < cantidadColumnas; i++) {
-                        filas[i] = rs.getObject(i + 1);
-                    }
-                    modelo.addRow(filas);
-                }
-            } catch (SQLException e) {
-                System.err.println(e.toString());
-            }
-        }
+			int[] anchos = {50, 50, 50, 50, 50};
+			for (int i = 0; i < tablaProductos.getColumnCount(); i++) {
+				tablaProductos.getColumnModel().getColumn(i).setPreferredWidth(anchos[1]);
+			}
+			
+			while (rs.next()) {
+				Object[] filas = new Object[cantidadColumnas];
+				for (int i = 0; i < cantidadColumnas; i++) {
+					filas[i] = rs.getObject(i + 1);
+				}
+				modelo.addRow(filas);
+			}
+			
+			if(modelo.getRowCount() == 0){
+				lblResultados.setText("No se han encontrado coincidencias");
+			} else {
+				lblResultados.setText(" ");
+			}
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+		}
+	}
 
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -78,9 +84,9 @@ public class VistaBuscar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
+        lblResultados = new javax.swing.JLabel();
         txtSku = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,7 +94,7 @@ public class VistaBuscar extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Productos Registrados");
+        jLabel1.setText("Buscar por SKU");
         bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 370, 50));
 
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
@@ -104,25 +110,28 @@ public class VistaBuscar extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaProductos);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 370, 230));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 370, 210));
 
-        jLabel2.setText("SKU:");
-        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        lblResultados.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblResultados.setForeground(new java.awt.Color(255, 0, 0));
+        lblResultados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblResultados.setText("{Resultados}");
+        bg.add(lblResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 370, 30));
 
         txtSku.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSkuActionPerformed(evt);
             }
         });
-        bg.add(txtSku, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 200, 20));
-
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+        txtSku.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSkuKeyReleased(evt);
             }
         });
-        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, 20));
+        bg.add(txtSku, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 340, 20));
+
+        jLabel3.setText("SKU:");
+        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 30, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,31 +141,28 @@ public class VistaBuscar extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSkuActionPerformed
-        // TODO add your handling code here:
+		// TODO add your handling code here:
     }//GEN-LAST:event_txtSkuActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String campo = txtSku.getText();
-        String where = "";
-        if (!campo.equals("")) {
-            where = "WHERE sku = '"+campo+"'";
-        }
-        actualizarTabla(where);
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    private void txtSkuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSkuKeyReleased
+		if (!txtSku.equals("")) {
+			actualizarTabla("WHERE sku = '" + txtSku.getText() + "'");
+		}
+    }//GEN-LAST:event_txtSkuKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblResultados;
     private javax.swing.JTable tablaProductos;
     private javax.swing.JTextField txtSku;
     // End of variables declaration//GEN-END:variables
