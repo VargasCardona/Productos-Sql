@@ -58,14 +58,21 @@ public class VistaBuscar extends javax.swing.JFrame {
 				lblResultados.setText(" ");
 			}
 			if(modelo.getRowCount() == 1){
-				lblSku.setText(rs.getObject(1).toString());
-				lblNombre.setText(rs.getObject(2).toString());
-				lblPrecio.setText(rs.getObject(3).toString());
-				lblDistribuidor.setText(rs.getObject(4).toString());
-				lblCategoria.setText(rs.getObject(5).toString());
-			}
+				lblSku.setText(tablaProductos.getValueAt(0, 0).toString());
+				lblNombre.setText(tablaProductos.getValueAt(0, 1).toString());
+				lblPrecio.setText(tablaProductos.getValueAt(0, 2).toString());
+				lblDistribuidor.setText(tablaProductos.getValueAt(0, 3).toString());
+				lblCategoria.setText(tablaProductos.getValueAt(0, 4).toString());
+			} else {
+                                lblSku.setText("-");
+				lblNombre.setText("-");
+				lblPrecio.setText("-");
+				lblDistribuidor.setText("-");
+				lblCategoria.setText("-");
+                        }
 		} catch (SQLException e) {
-			System.err.println(e.toString());
+//			System.err.println(e.toString());
+                        e.printStackTrace();
 		}
 	}
 
