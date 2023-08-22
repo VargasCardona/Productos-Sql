@@ -1,6 +1,6 @@
 package com.vistas;
 
-import com.utils.ConexionUtils;
+import com.controladores.ControladorGeneral;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -9,7 +9,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class VistaListar extends javax.swing.JFrame {
 
+	ControladorGeneral controlador;
+	
 	public VistaListar() {
+		    controlador = new ControladorGeneral();
+		
             this.setLocationRelativeTo(null);
             setTitle("Listar Productos");
 			
@@ -42,7 +46,7 @@ public class VistaListar extends javax.swing.JFrame {
                 DefaultTableModel modelo = new DefaultTableModel();
                 tablaProductos.setModel(modelo);
 
-                ResultSet rs = ConexionUtils.realizarConsulta("SELECT * FROM productos");
+                ResultSet rs = controlador.listarTabla("SELECT * FROM productos");
 
                 ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
                 int cantidadColumnas = rsMd.getColumnCount();

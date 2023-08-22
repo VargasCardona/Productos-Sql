@@ -1,6 +1,6 @@
 package com.vistas;
 
-import com.utils.ConexionUtils;
+import com.controladores.ControladorGeneral;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -9,7 +9,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class VistaBuscar extends javax.swing.JFrame {
 
+	ControladorGeneral controlador;
+
 	public VistaBuscar() {
+		controlador = new ControladorGeneral();
+
 		this.setLocationRelativeTo(null);
 		setTitle("Buscar Productos");
 
@@ -28,7 +32,7 @@ public class VistaBuscar extends javax.swing.JFrame {
 			tablaProductos.setModel(modelo);
 
 			String consulta = "SELECT * FROM productos " + where;
-			ResultSet rs = ConexionUtils.realizarConsulta(consulta);
+			ResultSet rs = controlador.listarTabla(consulta);
 
 			ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
 			int cantidadColumnas = rsMd.getColumnCount();
@@ -57,7 +61,7 @@ public class VistaBuscar extends javax.swing.JFrame {
 			} else {
 				lblResultados.setText(" ");
 			}
-			
+
 			if (modelo.getRowCount() == 1) {
 				lblSku.setText(filas[0].toString());
 				lblNombre.setText(filas[1].toString());
@@ -71,7 +75,7 @@ public class VistaBuscar extends javax.swing.JFrame {
 				lblDistribuidor.setText("-");
 				lblCategoria.setText("-");
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

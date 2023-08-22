@@ -3,14 +3,14 @@ package com.vistas;
 public class VistaPrincipal extends javax.swing.JFrame {
 
 	public VistaPrincipal() {
-            this.setLocationRelativeTo(null);
-            setTitle("Productos");
-            initComponents();
-			
-			btnActualizar.setEnabled(false);
-			btnEliminar.setEnabled(false);
+		this.setLocationRelativeTo(null);
+		setTitle("Productos");
+		initComponents();
+
+		btnActualizar.setEnabled(false);
+		btnEliminar.setEnabled(false);
 	}
-        
+
 //        private void logicaBotonBuscar(){
 //            String campo = txt.getText();
 //            String where = null;
@@ -19,7 +19,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
 //            }
 //            actualizarTabla(where);
 //        }
-        
 //        private void logicaBotonCrear(){
 //            String sku = txt.getText();
 //            String nombre = txt.getText();
@@ -34,8 +33,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
 //            
 //            String sql = "INSERT INTO `estudiantes` (`nombre`, `edad`, `cedula`, `codigo`, `id`) VALUES ('Dejan Stankovic', '23', '76132', '12', NULL);";
 //        }
-        
-
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -93,13 +90,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnListarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListarMouseClicked
-        VistaListar vista = new VistaListar();
+		VistaListar vista = new VistaListar();
 		vista.setVisible(true);
     }//GEN-LAST:event_btnListarMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        VistaBuscar vista = new VistaBuscar();
-        vista.setVisible(true);
+		VistaBuscar vista = new VistaBuscar();
+		vista.setVisible(true);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
