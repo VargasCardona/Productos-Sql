@@ -24,10 +24,23 @@ public class ControladorGeneral {
 		}
 	}
 
-	public ResultSet listarTabla(String sqlQuery) {
+	public ResultSet listarTabla() {
 		try {
-			PreparedStatement preparedStat = ConexionUtils.realizarConexion().prepareStatement(sqlQuery);
-			return preparedStat.executeQuery();
+			PreparedStatement ps = ConexionUtils.realizarConexion().prepareStatement("SELECT * FROM productos");
+			
+			return ps.executeQuery();
+		} catch (SQLException ex) {
+			System.err.print(ex);
+		}
+		return null;
+	}
+	
+	public ResultSet buscarCoincidencias(String where) {
+		try {
+			PreparedStatement ps = ConexionUtils.realizarConexion().prepareStatement("SELECT * FROM productos WHERE sku LIKE '%?%'");
+			ps.setString(1, where);
+			
+			return ps.executeQuery();
 		} catch (SQLException ex) {
 			System.err.print(ex);
 		}

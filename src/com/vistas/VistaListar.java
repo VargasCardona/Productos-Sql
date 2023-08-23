@@ -46,7 +46,7 @@ public class VistaListar extends javax.swing.JFrame {
                 DefaultTableModel modelo = new DefaultTableModel();
                 tablaProductos.setModel(modelo);
 
-                ResultSet rs = controlador.listarTabla("SELECT * FROM productos");
+                ResultSet rs = controlador.listarTabla();
 
                 ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
                 int cantidadColumnas = rsMd.getColumnCount();

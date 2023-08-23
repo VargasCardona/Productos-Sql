@@ -30,9 +30,14 @@ public class VistaBuscar extends javax.swing.JFrame {
 		try {
 			DefaultTableModel modelo = new DefaultTableModel();
 			tablaProductos.setModel(modelo);
+			
+			ResultSet rs = null;
 
-			String consulta = "SELECT * FROM productos " + where;
-			ResultSet rs = controlador.listarTabla(consulta);
+			if (where.isEmpty()){
+				rs = controlador.listarTabla();
+			} else {
+				rs = controlador.buscarCoincidencias(where);
+			}
 
 			ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
 			int cantidadColumnas = rsMd.getColumnCount();
