@@ -3,13 +3,21 @@ package com.utils;
 import static java.lang.String.valueOf;
 
 public class Utils {
-
-	public boolean esDouble(String entrada) {
+	
+	/**
+	 * Verifica si el String ingresado es un Double.
+	 *
+	 * @param entrada String a procesar
+	 * @return boolean indicando si el String ingresado es un Double
+	 * longs
+	 * @throws NumberFormatException {@inheritDoc}
+	 */
+	public static boolean esDouble(String entrada) {
 		Double aux;
 		try {
 			aux = Double.parseDouble(entrada);
 			return true;
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			return false;
 		}
 	}
@@ -20,7 +28,7 @@ public class Utils {
 	 * @param stringIngresado String bajo el cual se creara el identificador
 	 * @return String identificador compuesto de una letra y dos numeros
 	 */
-	public static String generarIdentificador(String stringIngresado) {
+	public static String generarSku(String stringIngresado) {
 		int numeroMaximo = 100;
 		int numeroMinimo = 999;
 		return "" + Character.toUpperCase(stringIngresado.charAt(0)) + valueOf((int) (Math.random() * (numeroMaximo - numeroMinimo + 1) + numeroMinimo));
