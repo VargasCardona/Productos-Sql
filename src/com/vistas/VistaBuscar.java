@@ -63,17 +63,15 @@ public class VistaBuscar extends javax.swing.JFrame {
 			}
 
 			if (modelo.getRowCount() == 1) {
-				lblSku.setText(filas[0].toString());
-				lblNombre.setText(filas[1].toString());
-				lblPrecio.setText(filas[2].toString());
-				lblDistribuidor.setText(filas[3].toString());
-				lblCategoria.setText(filas[4].toString());
+				txtNombre.setText(filas[1].toString());
+				txtPrecio.setText(filas[2].toString());
+				txtDistribuidor.setText(filas[3].toString());
+				txtCategoria.setText(filas[4].toString());
 			} else {
-				lblSku.setText("-");
-				lblNombre.setText("-");
-				lblPrecio.setText("-");
-				lblDistribuidor.setText("-");
-				lblCategoria.setText("-");
+				txtNombre.setText("");
+				txtPrecio.setText("");
+				txtDistribuidor.setText("");
+				txtCategoria.setText("");
 			}
 
 		} catch (SQLException e) {
@@ -92,16 +90,15 @@ public class VistaBuscar extends javax.swing.JFrame {
         lblResultados = new javax.swing.JLabel();
         txtSku = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        lblCategoria = new javax.swing.JLabel();
-        lblDistribuidor = new javax.swing.JLabel();
-        lblPrecio = new javax.swing.JLabel();
-        lblNombre = new javax.swing.JLabel();
-        lblSku = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtCategoria = new javax.swing.JTextField();
+        txtDistribuidor = new javax.swing.JTextField();
+        btnInsertar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,35 +140,30 @@ public class VistaBuscar extends javax.swing.JFrame {
         jLabel3.setText("SKU:");
         bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 30, 20));
 
-        jLabel2.setText("SKU:");
-        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
-
         jLabel4.setText("Nombre:");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, -1, -1));
 
         jLabel5.setText("Distribuidor:");
-        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, -1, -1));
+        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
 
         jLabel6.setText("Precio:");
-        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
+        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
 
         jLabel7.setText("Categoría:");
-        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, -1, -1));
+        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
+        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 200, -1));
 
-        lblCategoria.setText("-");
-        bg.add(lblCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 190, -1));
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+        bg.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 200, -1));
+        bg.add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, 200, -1));
+        bg.add(txtDistribuidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, 200, -1));
 
-        lblDistribuidor.setText("-");
-        bg.add(lblDistribuidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 190, -1));
-
-        lblPrecio.setText("-");
-        bg.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 190, -1));
-
-        lblNombre.setText("-");
-        bg.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 190, -1));
-
-        lblSku.setText("-");
-        bg.add(lblSku, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 190, -1));
+        btnInsertar.setText("Insertar");
+        bg.add(btnInsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -197,23 +189,26 @@ public class VistaBuscar extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_txtSkuKeyReleased
 
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnInsertar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCategoria;
-    private javax.swing.JLabel lblDistribuidor;
-    private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblResultados;
-    private javax.swing.JLabel lblSku;
     private javax.swing.JTable tablaProductos;
+    private javax.swing.JTextField txtCategoria;
+    private javax.swing.JTextField txtDistribuidor;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtSku;
     // End of variables declaration//GEN-END:variables
 }
