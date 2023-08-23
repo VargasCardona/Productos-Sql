@@ -103,7 +103,9 @@ public class VistaBuscar extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtCategoria = new javax.swing.JTextField();
         txtDistribuidor = new javax.swing.JTextField();
-        btnInsertar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnInsertar1 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,37 +148,56 @@ public class VistaBuscar extends javax.swing.JFrame {
         bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 30, 20));
 
         jLabel4.setText("Nombre:");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, -1, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, -1));
 
         jLabel5.setText("Distribuidor:");
-        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
+        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, -1, -1));
 
         jLabel6.setText("Precio:");
-        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
+        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, -1));
 
         jLabel7.setText("Categoría:");
-        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
-        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 200, -1));
+        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, -1));
+        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 240, -1));
 
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
             }
         });
-        bg.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 200, -1));
-        bg.add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, 200, -1));
-        bg.add(txtDistribuidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, 200, -1));
+        bg.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 240, -1));
+        bg.add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 240, -1));
+        bg.add(txtDistribuidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 240, -1));
 
-        btnInsertar.setText("Insertar");
-        bg.add(btnInsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, -1));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 260, 100, -1));
+
+        btnInsertar1.setText("Insertar");
+        btnInsertar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertar1ActionPerformed(evt);
+            }
+        });
+        bg.add(btnInsertar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 100, -1));
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        bg.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,9 +219,23 @@ public class VistaBuscar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnInsertar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInsertar1ActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btnInsertar;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnInsertar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
