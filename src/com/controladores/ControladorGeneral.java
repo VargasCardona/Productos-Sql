@@ -37,8 +37,8 @@ public class ControladorGeneral {
 	
 	public ResultSet buscarCoincidencias(String where) {
 		try {
-			PreparedStatement ps = ConexionUtils.realizarConexion().prepareStatement("SELECT * FROM productos WHERE sku LIKE '%?%'");
-			ps.setString(1, where);
+			PreparedStatement ps = ConexionUtils.realizarConexion().prepareStatement("SELECT * FROM productos WHERE sku LIKE CONCAT('%',?,'%')");
+			ps.setString(1, where); 
 			
 			return ps.executeQuery();
 		} catch (SQLException ex) {

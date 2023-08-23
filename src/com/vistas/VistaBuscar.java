@@ -209,7 +209,7 @@ public class VistaBuscar extends javax.swing.JFrame {
 
     private void txtSkuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSkuKeyReleased
 		if (!txtSku.getText().equals("")) {
-			actualizarTabla("WHERE sku = '" + txtSku.getText() + "'");
+			actualizarTabla(txtSku.getText());
 		} else {
 			actualizarTabla("");
 		}
