@@ -21,6 +21,19 @@ public class Utils {
 			return false;
 		}
 	}
+	
+	/**
+	 * Verifica si el String ingresado esta vacio
+	 *
+	 * @param entrada String a procesar
+	 * @return boolean indicando si el String ingresado esta vacio
+	 */
+	public static boolean estaVacio(String entrada) {
+		if (entrada.equals("")) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Genera un identificador basado en un String ingresado

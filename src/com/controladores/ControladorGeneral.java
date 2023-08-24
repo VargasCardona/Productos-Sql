@@ -1,5 +1,7 @@
 package com.controladores;
 
+import com.excepciones.CamposVaciosException;
+import com.excepciones.DoubleInvalidoException;
 import com.utils.ConexionUtils;
 import com.utils.Utils;
 import java.sql.PreparedStatement;
@@ -9,6 +11,17 @@ import java.sql.ResultSet;
 public class ControladorGeneral {
 
 	public void insertarTabla(String nombre, String precio, String distribuidor, String categoria) {
+		if (Utils.estaVacio(nombre)
+				|| Utils.estaVacio(precio)
+				|| Utils.estaVacio(distribuidor)
+				|| Utils.estaVacio(categoria)) {
+			throw new CamposVaciosException();
+		}
+
+		if (!Utils.esDouble(precio)) {
+			throw new DoubleInvalidoException();
+		}
+
 		try {
 			PreparedStatement ps = ConexionUtils.realizarConexion().prepareStatement("INSERT INTO productos (sku, nombre, precio, distribuidor, categoria) VALUES (?, ?, ?, ? ,?)");
 			ps.setString(1, Utils.generarSku(nombre));
@@ -27,19 +40,19 @@ public class ControladorGeneral {
 	public ResultSet listarTabla() {
 		try {
 			PreparedStatement ps = ConexionUtils.realizarConexion().prepareStatement("SELECT * FROM productos");
-			
+
 			return ps.executeQuery();
 		} catch (SQLException ex) {
 			System.err.print(ex);
 		}
 		return null;
 	}
-	
+
 	public ResultSet buscarCoincidencias(String where) {
 		try {
 			PreparedStatement ps = ConexionUtils.realizarConexion().prepareStatement("SELECT * FROM productos WHERE sku LIKE CONCAT('%',?,'%')");
-			ps.setString(1, where); 
-			
+			ps.setString(1, where);
+
 			return ps.executeQuery();
 		} catch (SQLException ex) {
 			System.err.print(ex);
