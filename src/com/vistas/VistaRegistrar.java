@@ -7,9 +7,11 @@ import javax.swing.JOptionPane;
 public class VistaRegistrar extends javax.swing.JFrame {
 
 	ControladorGeneral controlador;
+	VistaPrincipal vistaPrincipal;
 
-	public VistaRegistrar() {
+	public VistaRegistrar(VistaPrincipal vistaPrincipal) {
 		controlador = new ControladorGeneral();
+		this.vistaPrincipal = vistaPrincipal;
 
 		this.setLocationRelativeTo(null);
 		setTitle("Registrar Producto");
@@ -88,8 +90,9 @@ public class VistaRegistrar extends javax.swing.JFrame {
 					txtDistribuidor.getText(),
 					txtCategoria.getText());
 
-			JOptionPane.showMessageDialog(null, "Producto registrado");
 			this.dispose();
+			vistaPrincipal.actualizarTabla("");
+			JOptionPane.showMessageDialog(null, "Producto registrado");
 
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage());

@@ -2,6 +2,7 @@ package com.controladores;
 
 import com.excepciones.CamposVaciosException;
 import com.excepciones.DoubleInvalidoException;
+import com.excepciones.ElementoNoSeleccionadoException;
 import com.utils.ConexionUtils;
 import com.utils.Utils;
 import java.sql.PreparedStatement;
@@ -60,7 +61,34 @@ public class ControladorGeneral {
 		return null;
 	}
 
+	public ResultSet consultarSku(String sku) {
+		try {
+			PreparedStatement ps = ConexionUtils.realizarConexion().prepareStatement("SELECT * FROM productos WHERE sku = ?");
+			ps.setString(1, sku);
+
+			return ps.executeQuery();
+		} catch (SQLException ex) {
+			System.err.print(ex);
+		}
+		return null;
+	}
+
 	public void actualizarTabla(String sku, String nombre, String precio, String distribuidor, String categoria) {
+		if (Utils.estaVacio(sku)) {
+			throw new ElementoNoSeleccionadoException();
+		}
+
+		if (Utils.estaVacio(nombre)
+				|| Utils.estaVacio(precio)
+				|| Utils.estaVacio(distribuidor)
+				|| Utils.estaVacio(categoria)) {
+			throw new CamposVaciosException();
+		}
+
+		if (!Utils.esDouble(precio)) {
+			throw new DoubleInvalidoException();
+		}
+
 		try {
 			PreparedStatement ps = ConexionUtils.realizarConexion().prepareStatement("UPDATE productos SET nombre = ?, precio = ?, distribuidor = ?, categoria = ? WHERE sku = ?");
 			ps.setString(1, nombre);
@@ -77,6 +105,10 @@ public class ControladorGeneral {
 	}
 
 	public void eliminarTabla(String sku) {
+		if (Utils.estaVacio(sku)) {
+			throw new ElementoNoSeleccionadoException();
+		}
+
 		try {
 			PreparedStatement ps = ConexionUtils.realizarConexion().prepareStatement("DELETE FROM productos WHERE sku = ?");
 			ps.setString(1, sku);
