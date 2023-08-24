@@ -1,10 +1,12 @@
 package com.vistas;
 
 import com.controladores.ControladorGeneral;
+import com.utils.Utils;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VistaBuscar extends javax.swing.JFrame {
@@ -73,10 +75,7 @@ public class VistaBuscar extends javax.swing.JFrame {
 				txtDistribuidor.setText(filas[3].toString());
 				txtCategoria.setText(filas[4].toString());
 			} else {
-				txtNombre.setText("");
-				txtPrecio.setText("");
-				txtDistribuidor.setText("");
-				txtCategoria.setText("");
+				limpiarCampos();
 			}
 
 		} catch (SQLException e) {
@@ -104,7 +103,6 @@ public class VistaBuscar extends javax.swing.JFrame {
         txtCategoria = new javax.swing.JTextField();
         txtDistribuidor = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
-        btnInsertar1 = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -158,16 +156,16 @@ public class VistaBuscar extends javax.swing.JFrame {
 
         jLabel7.setText("Categoría:");
         bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, -1));
-        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 240, -1));
+        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 200, -1));
 
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
             }
         });
-        bg.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 240, -1));
-        bg.add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 240, -1));
-        bg.add(txtDistribuidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 240, -1));
+        bg.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 200, -1));
+        bg.add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 200, -1));
+        bg.add(txtDistribuidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 200, -1));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -175,15 +173,7 @@ public class VistaBuscar extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 260, 100, -1));
-
-        btnInsertar1.setText("Insertar");
-        btnInsertar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInsertar1ActionPerformed(evt);
-            }
-        });
-        bg.add(btnInsertar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 100, -1));
+        bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 260, 100, -1));
 
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -191,13 +181,13 @@ public class VistaBuscar extends javax.swing.JFrame {
                 btnActualizarActionPerformed(evt);
             }
         });
-        bg.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 100, -1));
+        bg.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,22 +210,61 @@ public class VistaBuscar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        if (camposVacios()) {
+            JOptionPane.showMessageDialog(null, "Llene todos los campos");
+            return;
+        }
+        
+        String sku = tablaProductos.getValueAt(0, 0).toString();
+        String nombre = txtNombre.getText();
+        String precio = txtPrecio.getText();
+        String distribuidor = txtDistribuidor.getText();
+        String categoria = txtCategoria.getText();
+        
+        if (Utils.esInt(precio)) {
+            JOptionPane.showMessageDialog(null, "El precio debe ser un número");
+            return;
+        }
+        controlador.actualizarTabla(sku, nombre, precio, distribuidor, categoria);
+        actualizarTabla(sku);
+        JOptionPane.showMessageDialog(null, "Se ha actualizado con exito");
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void btnInsertar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnInsertar1ActionPerformed
-
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        String sku = txtSku.getText();
+        if (sku.equals("") || tablaProductos.getRowCount() > 1) {
+            JOptionPane.showMessageDialog(null, "Ingrese una búsqueda de un solo resultado");
+            return;
+        }
+        sku = tablaProductos.getValueAt(0, 0).toString();
+        controlador.eliminarTabla(sku);
+        txtSku.setText("");
+        actualizarTabla("");
+        JOptionPane.showMessageDialog(null, "Se ha eliminado con exito");
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private boolean camposVacios() {
+        if (txtSku.getText().equals("")
+                || txtNombre.getText().equals("")
+                || txtPrecio.getText().equals("")
+                || txtDistribuidor.getText().equals("")
+                || txtCategoria.getText().equals("")) {
+            return true;
+        }
+        return false;
+    }
+    
+    private void limpiarCampos() {
+        txtNombre.setText("");
+        txtPrecio.setText("");
+        txtDistribuidor.setText("");
+        txtCategoria.setText("");    
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnInsertar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

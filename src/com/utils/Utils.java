@@ -5,17 +5,17 @@ import static java.lang.String.valueOf;
 public class Utils {
 	
 	/**
-	 * Verifica si el String ingresado es un Double.
+	 * Verifica si el String ingresado es un entero.
 	 *
 	 * @param entrada String a procesar
-	 * @return boolean indicando si el String ingresado es un Double
+	 * @return boolean indicando si el String ingresado es un entero
 	 * longs
 	 * @throws NumberFormatException {@inheritDoc}
 	 */
-	public static boolean esDouble(String entrada) {
-		Double aux;
+	public static boolean esInt(String entrada) {
+		Integer aux;
 		try {
-			aux = Double.parseDouble(entrada);
+			aux = Integer.parseInt(entrada);
 			return true;
 		} catch (NumberFormatException e) {
 			return false;
